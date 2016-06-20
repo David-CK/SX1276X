@@ -6,15 +6,13 @@
 (______/|_____)_|_|_| \__)_____)\____)_| |_|
     ( C )2014 Semtech
 
-Description: Interface for the radios, contains the main functions that a radio needs, and 5 callback functions
+Description: Contains the callbacks for the IRQs and any application related details
 
 License: Revised BSD License, see LICENSE.TXT file include in the project
 
-Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
+Maintainer: Miguel Luis and Gregory Cristian
 */
-#include "radio.h"
+#ifndef __MAIN_H__
+#define __MAIN_H__
 
-Radio::Radio(int x)
-{
-}
-
+#endif // __MAIN_H__

@@ -12,8 +12,9 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
+#define _VMDEBUG 1
 #define F_CPU 16000000L
-#define ARDUINO 10609
+#define ARDUINO 10608
 #define ARDUINO_AVR_UNO
 #define ARDUINO_ARCH_AVR
 #define __cplusplus 201103L
@@ -66,6 +67,20 @@ extern "C" void __cxa_pure_virtual() {;}
 
 //
 //
+void OnTxDone( void );
+void OnRxDone( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr);
+void OnTxTimeout( void );
+void OnRxTimeout( void );
+void OnRxError( void );
 
 #include <SX1276XVS.ino>
+#include <enums.h>
+#include <main.h>
+#include <radio.cpp>
+#include <radio.h>
+#include <sx1276-hal.cpp>
+#include <sx1276-hal.h>
+#include <sx1276.cpp>
+#include <sx1276.h>
+#include <sx1276Regs-Fsk.h>
 #endif

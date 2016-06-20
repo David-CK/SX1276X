@@ -15,19 +15,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SX1276XVS.ino" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="__vm\.SX1276XVS.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="radio\radio.h">
+    <ClInclude Include="enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="radio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sx1276.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sx1276-hal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sx1276Regs-Fsk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="radio\radio.cpp">
+    <ClCompile Include="radio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sx1276.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sx1276-hal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SX1276XVS.ino" />
   </ItemGroup>
 </Project>

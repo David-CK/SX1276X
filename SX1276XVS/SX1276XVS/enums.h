@@ -74,7 +74,6 @@ typedef struct
     bool     RxContinuous;
     uint32_t TxTimeout;
 }RadioFskSettings_t;
-
 /*!
  * Radio FSK packet handler state
  */
