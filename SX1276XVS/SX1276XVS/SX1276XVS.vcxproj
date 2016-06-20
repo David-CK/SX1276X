@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\dongz1x\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\cores\arduino;C:\Users\dongz1x\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\variants\standard;C:\Users\dongz1x\Desktop\SX1276X\SX1276X\SX1276XVS\SX1276XVS;C:\Users\dongz1x\Desktop\arduino-nightly\libraries;C:\Users\dongz1x\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jhftgb02.wgx\Micro Platforms\default\debuggers;C:\Users\dongz1x\Documents\Arduino\libraries;C:\Users\dongz1x\Desktop\arduino-nightly\hardware\tools\avr/avr/include/;C:\Users\dongz1x\Desktop\arduino-nightly\hardware\tools\avr//avr/include/avr/;C:\Users\dongz1x\Desktop\arduino-nightly\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>C:\Users\dongz1x\Desktop\SX1276X\SX1276X\SX1276XVS\SX1276XVS\__vm\.SX1276XVS.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10609;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -74,6 +74,13 @@
     <None Include="SX1276XVS.ino">
       <FileType>CppCode</FileType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="radio\radio.h" />
+    <ClInclude Include="__vm\.SX1276XVS.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="radio\radio.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
