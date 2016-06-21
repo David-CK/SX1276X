@@ -16,15 +16,100 @@ Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
 #define __SX1276_H__
 
 #include "radio.h"
+#include "sx1276Regs-Fsk.h"
+#include "sx1276Regs-LoRa.h"
+#include "typedefs.h"
+/*************NULL*/
+
+/*!
+ * Radio wakeup time from SLEEP mode
+ */
+#define RADIO_WAKEUP_TIME                           1000 // [us]
+
+/*!
+ * SX1276 definitions
+ */
+#define XTAL_FREQ                                   32000000
+#define FREQ_STEP                                   61.03515625
+
+#define RX_BUFFER_SIZE                              256
+
+#define DEFAULT_TIMEOUT                             200 //usec
+#define RSSI_OFFSET                                 -139.0
+
+
+/*!
+ * Constant values need to compute the RSSI value
+ */
+#define RSSI_OFFSET_LF                              -164.0
+#define RSSI_OFFSET_HF                              -157.0
+
+#define RF_MID_BAND_THRESH                          525000000
+
 /*! 
  * Actual implementation of a SX1276 radio, inherits Radio
  */
 class SX1276 : public Radio
 {
 protected:
-	uint8_t nss;
+    /*!
+    * SPI Interface
+    */
+    //SPI spi; // mosi, miso, sclk
+    DigitalOut nss;
+
+    /*!
+     * SX1276 Reset pin
+     */
+    DigitalInOut reset;
+
+    /*!
+     * SX1276 DIO pins
+     */
+    InterruptIn dio0;
+    InterruptIn dio1;
+    InterruptIn dio2; 
+    InterruptIn dio3;
+    InterruptIn dio4;
+    DigitalIn dio5;
+    
+    bool isRadioActive;
+    
+    uint8_t boardConnected; //1 = SX1276MB1LAS; 0 = SX1276MB1MAS
+    
+    uint8_t *rxBuffer;
+    
+    uint8_t previousOpMode;
+    
+    /*!
+     * Hardware DIO IRQ functions
+     */
+    DioIrqHandler *dioIrq;
+    
+/*************NULL*/
+    
+    /*!
+     *  rxTx: [1: Tx, 0: Rx]
+     */
+    uint8_t rxTx;
+    
+    RadioSettings_t settings;
+    
+    static const FskBandwidth_t FskBandwidths[] ;
 protected:
+
+    /*!
+    * Performs the Rx chain calibration for LF and HF bands
+    * \remark Must be called just after the reset so all registers are at their
+    *         default values
+    */
+    void RxChainCalibration( void );
+
 public:
+    SX1276( void ( *txDone )( ), void ( *txTimeout ) ( ), void ( *rxDone ) ( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr ), 
+            void ( *rxTimeout ) ( ), void ( *rxError ) ( ), void ( *fhssChangeChannel ) ( uint8_t channelIndex ), void ( *cadDone ) ( bool channelActivityDetected ),
+            PinName mosi, PinName miso, PinName sclk, PinName nss, PinName reset,
+            PinName dio0, PinName dio1, PinName dio2, PinName dio3, PinName dio4, PinName dio5 ); 
     SX1276( void ( *txDone )( ), void ( *txTimeout ) ( ), void ( *rxDone ) ( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr ), 
             void ( *rxTimeout ) ( ), void ( *rxError ) ( ), void ( *fhssChangeChannel ) ( uint8_t channelIndex ), void ( *cadDone ) ( bool channelActivityDetected ) );
     virtual ~SX1276( );
@@ -285,6 +370,13 @@ protected:
      */
     virtual void SpiInit( void ) = 0;
     
+    /*!
+     * @brief Initializes DIO IRQ handlers
+     *
+     * @param [IN] irqHandlers Array containing the IRQ callback functions
+     */
+    virtual void IoIrqInit( DioIrqHandler *irqHandlers ) = 0;
+
     /*!
      * @brief De-initializes the radio I/Os pins interface. 
      *

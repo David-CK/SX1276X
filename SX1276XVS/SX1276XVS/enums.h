@@ -14,6 +14,19 @@ Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
 */
 #ifndef __ENUMS_H__
 #define __ENUMS_H__
+#define wait_ms(x) delay(x)
+//#include "typedefs.h"
+#include <SPI.h>
+#include <stdint.h>
+typedef uint8_t DigitalIn;
+typedef uint8_t DigitalOut;
+typedef uint8_t DigitalInOut;
+typedef uint8_t InterruptIn;
+
+
+typedef uint8_t PinName;
+
+
 
 /*!
  *    State of the radio:
@@ -74,6 +87,7 @@ typedef struct
     bool     RxContinuous;
     uint32_t TxTimeout;
 }RadioFskSettings_t;
+
 /*!
  * Radio FSK packet handler state
  */

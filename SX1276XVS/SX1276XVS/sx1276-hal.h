@@ -22,12 +22,27 @@ Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
 class SX1276MB1xAS : public SX1276
 {
 protected:
+    /*!
+     * Antenna switch GPIO pins objects
+     */
+    //DigitalInOut antSwitch;
+    
+    //DigitalIn fake;
+    
 private:
+    static const RadioRegisters_t RadioRegsInit[];
+    
 public:
+    SX1276MB1xAS( void ( *txDone )( ), void ( *txTimeout ) ( ), void ( *rxDone ) ( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr ), 
+                  void ( *rxTimeout ) ( ), void ( *rxError ) ( ), void ( *fhssChangeChannel ) ( uint8_t channelIndex ), void ( *cadDone ) ( bool ChannelActivityDetected ),
+            PinName mosi, PinName miso, PinName sclk, PinName nss, PinName reset,
+            PinName dio0, PinName dio1, PinName dio2, PinName dio3, PinName dio4, PinName dio5,
+            PinName antSwitch ); 
             SX1276MB1xAS( void ( *txDone )( ), void ( *txTimeout ) ( ), void ( *rxDone ) ( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr ),
                           void ( *rxTimeout ) ( ), void ( *rxError ) ( ), void ( *fhssChangeChannel ) ( uint8_t channelIndex ), void ( *cadDone ) ( bool ChannelActivityDetected ) );
     virtual ~SX1276MB1xAS( ) { };
     
+    protected:
     /*!
      * @brief Initializes the radio I/Os pins interface
      */
@@ -42,13 +57,13 @@ public:
      * @brief Initializes the radio SPI
      */
     virtual void SpiInit( void );
-
-
-
-
-
-
-
+    
+    /*!
+     * @brief Initializes DIO IRQ handlers
+     *
+     * @param [IN] irqHandlers Array containing the IRQ callback functions
+     */
+    virtual void IoIrqInit( DioIrqHandler *irqHandlers );
 
     /*!
      * @brief De-initializes the radio I/Os pins interface. 
@@ -92,13 +107,13 @@ public:
      * @param [IN] rxTx [1: Tx, 0: Rx]
      */
     virtual void SetAntSw( uint8_t rxTx );
-
-
-
-
-
-
-
+    
+    public:
+    /*!
+     * @brief Detect the board connected by reading the value of the antenna switch pin
+     */
+    virtual uint8_t DetectBoardType( void );    
+    
     /*!
      * @brief Checks if the given RF frequency is supported by the hardware
      *

@@ -15,8 +15,8 @@ Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
 #ifndef __TYPEDEFS_H__
 #define __TYPEDEFS_H__
 
-#include "mbed.h"
-#include "./enums/enums.h"
+#include "./enums.h"
+/*************NULL*/
 
 class SX1276;
 class SX1276MB1xAS;

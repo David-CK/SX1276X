@@ -12,9 +12,8 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define _VMDEBUG 1
 #define F_CPU 16000000L
-#define ARDUINO 10608
+#define ARDUINO 10609
 #define ARDUINO_AVR_UNO
 #define ARDUINO_ARCH_AVR
 #define __cplusplus 201103L
@@ -65,6 +64,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #define portInputRegister(P)
 #define portModeRegister(P)
 
+static void lora_pin_nss(uint8_t val);
+uint8_t lora_spi(uint8_t out);
 //
 //
 void OnTxDone( void );
@@ -74,6 +75,7 @@ void OnRxTimeout( void );
 void OnRxError( void );
 
 #include <SX1276XVS.ino>
+#include <debug.h>
 #include <enums.h>
 #include <main.h>
 #include <radio.cpp>
@@ -83,4 +85,6 @@ void OnRxError( void );
 #include <sx1276.cpp>
 #include <sx1276.h>
 #include <sx1276Regs-Fsk.h>
+#include <sx1276Regs-LoRa.h>
+#include <typedefs.h>
 #endif
