@@ -1,3 +1,5 @@
+#include <TimerOne.h>
+
 #include <SPI.h>
 #include "sx1276-hal.h"
 #include "sx1276Regs-Fsk.h"
@@ -54,6 +56,7 @@ void setup()
 	debug("aaa\n");
 	pinMode(10, OUTPUT);
 	SPI.begin();
+	Timer1.initialize();
 
 	lora_pin_nss(0);
 	lora_spi(0x42 & 0x7F);

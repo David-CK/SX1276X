@@ -15,8 +15,9 @@ Maintainers: Miguel Luis, Gregory Cristian and Nicolas Huguenin
 #ifndef __RADIO_H__
 #define __RADIO_H__
 
-#include <stdint.h>
+//#include "mbed.h"
 
+//#include "./enums/enums.h"
 #include "enums.h"
 
 /*!
